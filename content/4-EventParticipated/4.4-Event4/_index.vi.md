@@ -82,3 +82,5 @@ Phiên làm việc “Trụ cột Bảo mật AWS Well-Architected” đã cung 
 
 ### Ảnh sự kiện
 ![Photo](/images/aws3.jpg)
+![Photo](/images/aws32.jpg)
+![Photo](/images/aws33.jpg)

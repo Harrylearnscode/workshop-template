@@ -7,7 +7,7 @@ weight : 1
 chapter : false
 pre : " <b> 5.3 </b> "
 ---
-
+# Tạo S3
 1. Truy cập vào [S3](https://us-east-1.console.aws.amazon.com/s3/home?region=us-east-1)
 2. Nhấn chọn **Create Bucket**:
 

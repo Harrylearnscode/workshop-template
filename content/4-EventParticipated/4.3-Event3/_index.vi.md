@@ -1,139 +1,90 @@
-# Báo cáo Tóm tắt: "DevOps trên AWS" --- Phiên bản Diễn đạt lại (Tiếng Việt)
+---
+title : "Event 2"
+date :  "2025-09-09" 
+weight : 2 
+chapter : false
+pre : " <b> 4.2 </b> "
+---
+
+
+# Báo cáo tổng hợp: “DevOps trên AWS”
 
 ## Mục tiêu Sự kiện
-
--   Hiểu rõ văn hóa DevOps cùng các chỉ số hiệu suất quan trọng như DORA
-    và MTTR.
--   Học cách tự động hóa quy trình build, test và deploy bằng bộ công cụ
-    CI/CD của AWS.
--   Nắm vững phương pháp Infrastructure as Code (IaC) với CloudFormation
-    và AWS CDK.
--   Tìm hiểu chiến lược container hóa qua ECR, ECS, EKS và App Runner.
--   Xây dựng khả năng quan sát (observability) toàn diện bằng CloudWatch
-    và X-Ray.
+* Hiểu các nguyên tắc cốt lõi của văn hóa DevOps và các chỉ số hiệu suất chính (DORA, MTTR).
+* Nắm vững chuỗi công cụ CI/CD của AWS để tự động hóa việc xây dựng (build), kiểm thử (test) và triển khai (deployment).
+* Tìm hiểu các khái niệm Cơ sở hạ tầng dưới dạng Mã (IaC) sử dụng CloudFormation và AWS CDK.
+* Khám phá các chiến lược container hóa sử dụng ECR, ECS, EKS và App Runner.
+* Triển khai khả năng quan sát toàn diện (full-stack observability) và giám sát với CloudWatch và X-Ray.
 
 ## Diễn giả
+* **Các Chuyên gia DevOps của AWS**
+* **Các Kiến trúc sư Giải pháp Cấp cao**
 
--   **Các chuyên gia DevOps từ AWS**
--   **Những Kiến trúc sư Giải pháp cấp cao**
-
-------------------------------------------------------------------------
-
-## Các nội dung chính
+## Điểm nhấn Chính
 
 ### Văn hóa & Tư duy DevOps
+* **Tóm tắt:** Tích hợp với các khái niệm AI/ML từ các phiên trước.
+* **Các chỉ số quan trọng:** Tập trung vào Tần suất triển khai, Thời gian thực hiện thay đổi, Thời gian trung bình để khôi phục (MTTR) và Tỷ lệ lỗi khi thay đổi (các chỉ số DORA).
+* **Chuyển đổi văn hóa:** Chuyển từ các nhóm làm việc riêng lẻ (siloed) sang mô hình chia sẻ trách nhiệm.
 
--   **Ôn tập:** Tiếp nối các khái niệm AI/ML từ những buổi trước.
--   **Tầm quan trọng của số liệu:** Tập trung vào Deployment Frequency,
-    Lead Time for Changes, MTTR và Change Failure Rate.
--   **Chuyển đổi văn hóa:** Thúc đẩy tinh thần trách nhiệm chung, phá bỏ
-    mô hình làm việc theo silo.
+### Đường ống CI/CD trên AWS
+* **Kiểm soát nguồn (Source Control):** Sử dụng AWS CodeCommit và triển khai các chiến lược Git như GitFlow và Trunk-based.
+* **Xây dựng & Kiểm thử:** Cấu hình AWS CodeBuild để kiểm thử và biên dịch tự động.
+* **Triển khai:** Sử dụng AWS CodeDeploy để thực hiện các chiến lược triển khai an toàn:
+* **Blue/Green:** Giảm thiểu thời gian ngừng hoạt động và rủi ro.
+* **Canary:** Triển khai dần dần cho một nhóm nhỏ người dùng.
+* **Rolling:** Cập nhật các instance theo từng bước.
+* **Điều phối:** Kết nối tất cả các khâu với AWS CodePipeline
 
-### Pipeline CI/CD trên AWS
+### Cơ sở hạ tầng dưới dạng Mã (IaC)
+* **AWS CloudFormation:** Định nghĩa hạ tầng bằng template, stack và quản lý sự sai lệch cấu hình (drift).
+* **AWS CDK (Cloud Development Kit):** Sử dụng ngôn ngữ lập trình quen thuộc để định nghĩa tài nguyên đám mây dưới dạng các cấu trúc mã (constructs).
+* **So sánh:** Lựa chọn giữa template khai báo (CloudFormation) và mã mệnh lệnh (CDK) dựa trên kỹ năng của đội ngũ.
 
--   **Quản lý mã nguồn:** Sử dụng **AWS CodeCommit** cùng các chiến lược
-    Git như GitFlow hoặc trunk-based.
--   **Build & Test:** Tự động hóa build và kiểm thử bằng **AWS
-    CodeBuild**.
--   **Triển khai:** Áp dụng các mô hình triển khai an toàn thông qua
-    **AWS CodeDeploy**:
-    -   **Blue/Green:** Giảm thời gian downtime và rủi ro.
-    -   **Canary:** Xả lưu lượng dần cho một nhóm người dùng nhỏ.
-    -   **Rolling:** Cập nhật lần lượt từng nhóm instance.
--   **Tổng hợp pipeline:** Kết nối toàn bộ quy trình bằng **AWS
-    CodePipeline**.
+### Dịch vụ Container & Khả năng quan sát
+* **Quản lý Container:** Lưu trữ image trong Amazon ECR với các chính sách vòng đời.
+* **Điều phối:** Lựa chọn giữa Amazon ECS (đơn giản, native AWS) và **Amazon EKS** (chuẩn Kubernetes), hoặc AWS App Runner để triển khai đơn giản kiểu PaaS.
+* **Giám sát:** Sử dụng Amazon CloudWatch cho các chỉ số/cảnh báo và AWS X-Ray cho truy vết phân tán để xác định điểm nghẽn hiệu năng.
 
-### Infrastructure as Code
-
--   **CloudFormation:** Định nghĩa hạ tầng bằng template, quản lý drift
-    giữa các stack.
--   **AWS CDK:** Dùng các ngôn ngữ lập trình để mô hình hóa tài nguyên
-    AWS bằng các construct cấp cao.
--   **So sánh IaC:** Lựa chọn giữa CloudFormation (khai báo) và CDK
-    (mệnh lệnh) dựa trên năng lực đội ngũ.
-
-### Dịch vụ Container & Observability
-
--   **Quản lý vòng đời container:** Lưu trữ image trong **Amazon ECR**
-    với lifecycle policy.
--   **Dịch vụ chạy container:** So sánh **ECS** (đơn giản, native AWS),
-    **EKS** (chuẩn Kubernetes), và **App Runner** (triển khai PaaS đơn
-    giản).
--   **Giám sát:** Sử dụng **CloudWatch** cho metric/alarm và **X-Ray**
-    để tracing và tìm bottleneck hiệu năng.
-
-------------------------------------------------------------------------
-
-## Các điểm rút ra
+## Bài học Chính (Key Takeaways)
 
 ### Chiến lược DevOps
-
--   **Tự động hóa trước tiên:** Giảm lỗi thủ công nhờ tự động hóa từ hạ
-    tầng đến triển khai.
--   **Đo lường liên tục:** Sử dụng DORA để đánh giá tốc độ và độ ổn
-    định.
--   **Shift Left:** Đưa kiểm thử & bảo mật vào sớm trong pipeline.
+* **Tự động hóa là ưu tiên:** Triển khai thủ công dễ gặp lỗi; mọi thứ từ hạ tầng đến triển khai mã nguồn cần được tự động hóa.
+* **Đo lường:** Bạn không thể cải thiện những gì bạn không đo lường. Sử dụng chỉ số DORA để theo dõi tốc độ và sự ổn định.
+* **Dịch chuyển sang trái (Shift Left):** Tích hợp kiểm thử và bảo mật sớm trong pipeline CI/CD, thay vì để ở cuối quy trình.
 
 ### Kiến trúc Kỹ thuật
+* **Hạ tầng bất biến (Immutable Infrastructure):** Coi máy chủ là tài nguyên dùng một lần; thay thế chúng thay vì vá lỗi tại chỗ.
+* **Container hóa:** Tách biệt ứng dụng khỏi hệ điều hành bên dưới để đảm bảo tính nhất quán giữa các môi trường (Dev, Test, Prod).
+* **Khả năng quan sát:** Vượt ra ngoài việc giám sát "bật/tắt" đơn giản để có thông tin sâu sắc bằng cách sử dụng truy vết phân tán.
 
--   **Immutable Infrastructure:** Thay thế thay vì cập nhật trực tiếp
-    trên server.
--   **Container hóa:** Tạo môi trường nhất quán giữa Dev -- Test --
-    Prod.
--   **Observability sâu:** Không chỉ monitoring uptime mà cần tracing
-    toàn hệ thống.
+### Ứng dụng vào Công việc
+* **Triển khai CI/CD:** Thiết lập CodePipeline cho các dự án hiện tại để tự động hóa quy trình build/deploy cho ứng dụng Spring Boot/React.
+* **Áp dụng IaC:** Bắt đầu định nghĩa tài nguyên AWS (database, S3 bucket, Cognito User Pools) bằng AWS CDK thay vì dùng console.
+* **Container hóa:** Dockerize các microservices hiện có và đẩy image lên ECR.
+* **Nâng cao giám sát:** Thêm X-Ray vào các dịch vụ backend để trực quan hóa độ trễ API và hiệu năng truy vấn cơ sở dữ liệu.
 
-### Ứng dụng vào công việc
+## Trải nghiệm Sự kiện
 
--   **Triển khai CI/CD:** Thiết lập CodePipeline cho ứng dụng Spring
-    Boot hoặc React.
--   **Áp dụng IaC:** Khai báo tài nguyên AWS (CSDL, S3, Cognito...) bằng
-    **AWS CDK**.
--   **Container hóa:** Dockerize microservices và đẩy image lên ECR.
--   **Nâng cao giám sát:** Thêm X-Ray để phân tích độ trễ API và truy
-    vấn DB.
-
-------------------------------------------------------------------------
-
-## Trải nghiệm tại sự kiện
-
-Workshop **"DevOps on AWS"** mang lại góc nhìn thực tế về tự động hóa
-quy trình triển khai phần mềm, giúp thu hẹp khoảng cách giữa lập trình
-và vận hành sản phẩm.
+Tham dự hội thảo “DevOps on AWS” đã cung cấp một lộ trình thực tế để tự động hóa vòng đời phân phối phần mềm. Nó thu hẹp khoảng cách giữa việc viết code và chạy nó một cách đáng tin cậy trên môi trường production (thực tế). Các trải nghiệm chính bao gồm:
 
 ### Học hỏi từ chuyên gia
+* Làm rõ "Ma trận thuật ngữ" của các công cụ AWS (CodeCommit, CodeBuild, CodeDeploy, CodePipeline) và cách chúng tích hợp.
+* Hiểu giá trị chiến lược của chỉ số DORA trong việc chứng minh hiệu quả đầu tư DevOps với các bên liên quan.
 
--   Hiểu rõ hệ sinh thái DevOps của AWS (CodeCommit, CodeBuild,
-    CodeDeploy, CodePipeline).
--   Biết cách dùng DORA để giải thích giá trị DevOps cho lãnh đạo doanh
-    nghiệp.
+### Tiếp cận kỹ thuật thực tế
+* **CI/CD Walkthrough:** Bản demo pipeline đầy đủ cho thấy chính xác cách thay đổi code kích hoạt build và deploy tự động.
+* **IaC Implementation:** Xem AWS CDK hoạt động là một điểm nhấn—viết hạ tầng bằng Java/TypeScript trực quan hơn nhiều cho lập trình viên so với viết template JSON/YAML.
+* **Deployment Strategies:** Trực quan hóa Blue/Green deployments đã chứng minh cách phát hành bản cập nhật mà không có thời gian chết (zero downtime).
 
-### Trải nghiệm thực hành
+### Kết nối và thảo luận
+* Thảo luận về sự đánh đổi giữa ECS và EKS với đồng nghiệp, nhận ra rằng đối với nhiều dự án, ECS hoặc App Runner cung cấp con đường nhanh hơn để ra production với ít chi phí vận hành hơn.
+* Trao đổi ý tưởng về cách xử lý database migrations (di chuyển dữ liệu) trong một pipeline CI/CD.
 
--   **CI/CD Demo:** Minh họa cách code push tự động kích hoạt build &
-    deploy.
--   **IaC bằng CDK:** Trực quan hơn khi viết hạ tầng bằng
-    TypeScript/Java thay vì JSON/YAML.
--   **Chiến lược triển khai:** Blue/Green cho thấy cách update không
-    downtime.
+### Bài học rút ra
+* **Phát hiện sai lệch (Drift Detection)** trong CloudFormation là rất quan trọng để duy trì tính toàn vẹn của hạ tầng.
+* **Khả năng quan sát (Observability)** không phải là tùy chọn đối với microservices; nếu không có X-Ray, việc gỡ lỗi kiến trúc phân tán gần như là không thể.
+* Một nền tảng DevOps vững chắc giúp giảm đáng kể thời gian trung bình để khôi phục (MTTR), cho phép các team đổi mới nhanh hơn mà ít sợ làm hỏng hệ thống production.
 
-### Thảo luận & kết nối
-
--   Thảo luận về việc chọn ECS hay EKS --- nhận ra ECS/App Runner phù
-    hợp cho triển khai nhanh với ít overhead.
--   Chia sẻ kinh nghiệm xử lý database migration trong pipeline.
-
-### Bài học quan trọng
-
--   Drift detection trong CloudFormation rất quan trọng để giữ ổn định
-    hạ tầng.
--   Observability là bắt buộc cho microservices --- X-Ray giúp tracing
-    hệ thống phân tán.
--   Một nền tảng DevOps vững mạnh giảm MTTR đáng kể và hỗ trợ đổi mới
-    nhanh.
-
-------------------------------------------------------------------------
-
-### Hình ảnh sự kiện
-
+### Ảnh sự kiện
 ![Photo](/images/aws2.jpg)

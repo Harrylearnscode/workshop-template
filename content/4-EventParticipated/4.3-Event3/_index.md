@@ -1,143 +1,90 @@
 ---
-title: "Event 2"
-date: "2025-09-09"
-weight: 1
-chapter: false
-pre: " <b> 4.2. </b> "
+title : "Event 2"
+date : "2025-09-09"
+weight : 2
+chapter : false
+pre : " <b> 4.2 </b> "
 ---
 
-# Summary Report: "DevOps on AWS" --- Paraphrased Version
+
+# Summary Report: “DevOps on AWS”
 
 ## Event Objectives
-
--   Gain a solid understanding of DevOps culture along with essential
-    performance indicators such as DORA metrics and MTTR.
--   Learn how to automate build, test, and deployment processes using
-    the AWS CI/CD toolset.
--   Explore Infrastructure as Code (IaC) practices using CloudFormation
-    and AWS CDK.
--   Examine containerization approaches with ECR, ECS, EKS, and App
-    Runner.
--   Build end-to-end observability with CloudWatch and X-Ray.
+* Understand the core principles of DevOps culture and key performance metrics (DORA, MTTR).
+* Master the AWS CI/CD toolchain for automating build, test, and deployment.
+* Learn Infrastructure as Code (IaC) concepts using CloudFormation and AWS CDK.
+* Explore containerization strategies using ECR, ECS, EKS, and App Runner.
+* Implement full-stack observability and monitoring with CloudWatch and X-Ray.
 
 ## Speakers
-
--   **AWS DevOps Experts**
--   **Senior Solutions Architects**
+* **AWS DevOps Specialists**
+* **Senior Solutions Architects**
 
 ## Key Highlights
 
 ### DevOps Culture & Mindset
-
--   **Revisited Concepts:** Built on AI/ML foundations from earlier
-    sessions.
--   **Importance of Metrics:** Emphasis on Deployment Frequency, Lead
-    Time for Changes, MTTR, and Change Failure Rate.
--   **Cultural Transformation:** Encouraging shared ownership and
-    dismantling silos.
+* **Recap:** Integration with AI/ML concepts from previous sessions.
+* **Metrics Matter:** Focus on Deployment Frequency, Lead Time for Changes, Mean Time to Restore (MTTR), and Change Failure Rate (DORA metrics).
+* **Cultural Shift:** Moving from siloed teams to shared responsibility.
 
 ### AWS CI/CD Pipeline
+* **Source Control:** Utilizing **AWS CodeCommit** and implementing Git strategies like GitFlow and Trunk-based development.
+* **Build & Test:** Configuring **AWS CodeBuild** for automated testing and compilation.
+* **Deployment:** Using **AWS CodeDeploy** to implement safe deployment strategies:
+  * **Blue/Green:** Reduces downtime and risk.
+  * **Canary:** Gradual rollout to a small subset of users.
+  * **Rolling:** Update instances incrementally.
+* **Orchestration:** Tying it all together with **AWS CodePipeline**.
 
--   **Source Control:** Leveraged **AWS CodeCommit** with GitFlow or
-    trunk-based workflows.
--   **Build & Test:** Automated compilation and testing via **AWS
-    CodeBuild**.
--   **Deployments:** Implemented deployment patterns using **AWS
-    CodeDeploy**:
-    -   **Blue/Green:** Minimizes downtime and deployment risks.
-    -   **Canary:** Gradual traffic shifting to validate behavior on a
-        small user group.
-    -   **Rolling:** Sequential updates across instances.
--   **Pipeline Automation:** Coordinated end-to-end automation through
-    **AWS CodePipeline**.
-
-### Infrastructure as Code
-
--   **CloudFormation:** Defined infrastructure with templates and
-    managed drift across stacks.
--   **AWS CDK:** Used programming languages to create infrastructure
-    using high-level constructs.
--   **Choosing IaC Tools:** Evaluated declarative (CloudFormation)
-    vs. imperative (CDK) styles based on team capabilities.
+### Infrastructure as Code (IaC)
+* **AWS CloudFormation:** Defining infrastructure using templates, stacks, and managing configuration drift.
+* **AWS CDK (Cloud Development Kit):** Using familiar programming languages to define cloud resources as code constructs.
+* **Comparison:** Choosing between declarative templates (CloudFormation) vs. imperative code (CDK) based on team skills.
 
 ### Container Services & Observability
-
--   **Container Lifecycle:** Managed images in **Amazon ECR** using
-    lifecycle rules.
--   **Service Options:** Compared **ECS** for simplicity, **EKS** for
-    Kubernetes compatibility, and **App Runner** for streamlined
-    deployments.
--   **Monitoring:** Applied **CloudWatch** metrics/alarms and **X-Ray**
-    tracing to detect performance issues.
+* **Container Management:** Storing images in **Amazon ECR** with lifecycle policies.
+* **Orchestration:** Choosing between **Amazon ECS** (simpler, AWS-native) and **Amazon EKS** (Kubernetes standard), or **AWS App Runner** for simplified PaaS-like deployment.
+* **Monitoring:** Using **Amazon CloudWatch** for metrics/alarms and **AWS X-Ray** for distributed tracing to identify performance bottlenecks.
 
 ## Key Takeaways
 
 ### DevOps Strategy
-
--   **Automate Everything:** Reduce human error by automating deployment
-    and infrastructure processes.
--   **Measure Continuously:** Track progress using DORA metrics to
-    evaluate delivery efficiency.
--   **Shift Left:** Integrate testing and security early in the
-    pipeline.
+* **Automation First:** Manual deployments are error-prone; everything from infrastructure to code deployment should be automated.
+* **Measurement:** You cannot improve what you do not measure. Use DORA metrics to track velocity and stability.
+* **Shift Left:** Integrate testing and security early in the CI/CD pipeline, not at the end.
 
 ### Technical Architecture
+* **Immutable Infrastructure:** Treat servers as disposable resources; replace them rather than patching them in place.
+* **Containerization:** Decouple applications from the underlying OS to ensure consistency across environments (Dev, Test, Prod).
+* **Observability:** Moving beyond simple "up/down" monitoring to deep insights using distributed tracing.
 
--   **Immutable Infrastructure:** Replace servers instead of patching
-    them.
--   **Containerized Environments:** Promote consistent behavior across
-    Dev, Test, and Prod.
--   **Deep Observability:** Move past basic uptime checks by adopting
-    distributed tracing.
-
-### Practical Applications
-
--   **Build CI/CD Pipelines:** Create CodePipeline flows for Spring Boot
-    or React workloads.
--   **Adopt IaC:** Provision AWS services (databases, S3, Cognito, etc.)
-    using **AWS CDK**.
--   **Containerize Projects:** Push Docker images to ECR to standardize
-    deployments.
--   **Enhance Monitoring:** Add X-Ray tracing to analyze latency and
-    backend performance.
+### Applying to Work
+* **Implement CI/CD:** Set up a CodePipeline for current projects to automate the build/deploy process for Spring Boot/React applications.
+* **Adopt IaC:** Start defining AWS resources (databases, S3 buckets, Cognito User Pools) using **AWS CDK** instead of the console.
+* **Containerize:** Dockerize existing microservices and push images to ECR.
+* **Enhance Monitoring:** Add X-Ray instrumentation to backend services to visualize API latency and database query performance.
 
 ## Event Experience
 
-The **"DevOps on AWS"** workshop delivered a hands-on perspective on
-modern software delivery, bridging the gap between code development and
-production reliability.
+Attending the **“DevOps on AWS”** workshop provided a practical roadmap for automating the software delivery lifecycle. It bridged the gap between writing code and running it reliably in production. Key experiences included:
 
-### Learning from Experts
+### Learning from experts
+* Gained clarity on the "Alphabet Soup" of AWS tools (CodeCommit, CodeBuild, CodeDeploy, CodePipeline) and how they integrate.
+* Understood the strategic value of **DORA metrics** in justifying DevOps investments to business stakeholders.
 
--   Clarified the AWS DevOps ecosystem---CodeCommit, CodeBuild,
-    CodeDeploy, CodePipeline---and how they interconnect.
--   Understood how DORA metrics support conversations with business
-    leaders about DevOps investment.
+### Hands-on technical exposure
+* **CI/CD Walkthrough:** The demo of a full pipeline showed exactly how code changes trigger builds and deployments automatically.
+* **IaC Implementation:** Seeing **AWS CDK** in action was a highlight—writing infrastructure in Java/TypeScript is much more intuitive for developers than writing JSON/YAML templates.
+* **Deployment Strategies:** Visualizing **Blue/Green deployments** demonstrated how to release updates with zero downtime.
 
-### Hands-On Insights
+### Networking and discussions
+* Discussed the trade-offs between **ECS and EKS** with peers, realizing that for many projects, ECS or App Runner provides a faster path to production with less overhead.
+* Exchanged ideas on how to handle **database migrations** within a CI/CD pipeline.
 
--   **CI/CD Demo:** Showed how code pushes automatically trigger builds
-    and deployments.
--   **IaC with CDK:** Highlighted the benefits of writing infrastructure
-    in TypeScript/Java over JSON/YAML.
--   **Deployment Models:** Blue/Green demos illustrated how to release
-    updates without service interruptions.
+### Lessons learned
+* **Drift Detection** in CloudFormation is critical for maintaining infrastructure integrity.
+* **Observability** is not optional for microservices; without X-Ray, debugging distributed architectures is nearly impossible.
+* A solid DevOps foundation significantly reduces **Mean Time to Recovery (MTTR)**, allowing teams to innovate faster with less fear of breaking production.
 
-### Networking & Peer Discussions
-
--   Discussed trade-offs between ECS and EKS, realizing that ECS or App
-    Runner often provide quicker, simpler paths to production.
--   Shared solutions for managing database schema changes within CI/CD.
-
-### Key Lessons
-
--   CloudFormation drift detection is crucial for infrastructure
-    reliability.
--   Observability is mandatory for microservices---X-Ray is
-    indispensable for tracing distributed systems.
--   Strong DevOps practices drastically reduce MTTR and support fast,
-    safe innovation.
-
-### Event Photo
-
+### Event photo
 ![Photo](/images/aws2.jpg)
