@@ -5,122 +5,54 @@ weight: 1
 chapter: false
 pre: " <b> 3.1. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
+# SAP và AWS giới thiệu AI Co-Innovation Program nhằm tạo generative AI solutions
 
-# Getting Started with Healthcare Data Lakes: Using Microservices
+**Giúp khách hàng điều chỉnh sự biến động của thị trường và sự phức tạp của chuỗi cung ứng.**
 
-Data lakes can help hospitals and healthcare facilities turn data into business insights, maintain business continuity, and protect patient privacy. A **data lake** is a centralized, managed, and secure repository to store all your data, both in its raw and processed forms for analysis. Data lakes allow you to break down data silos and combine different types of analytics to gain insights and make better business decisions.
-
-This blog post is part of a larger series on getting started with setting up a healthcare data lake. In my final post of the series, *“Getting Started with Healthcare Data Lakes: Diving into Amazon Cognito”*, I focused on the specifics of using Amazon Cognito and Attribute Based Access Control (ABAC) to authenticate and authorize users in the healthcare data lake solution. In this blog, I detail how the solution evolved at a foundational level, including the design decisions I made and the additional features used. You can access the code samples for the solution in this Git repo for reference.
+*Sara Alligood | 20/5/2025*
 
 ---
 
-## Architecture Guidance
+*Bài viết này được viết bởi **Sara Alligood**, Trưởng phòng SAP Toàn cầu tại AWS, và **Kai Mühlbauer**, Trưởng phòng Quản lý Đối tác & Sản phẩm AI tại SAP.*
 
-The main change since the last presentation of the overall architecture is the decomposition of a single service into a set of smaller services to improve maintainability and flexibility. Integrating a large volume of diverse healthcare data often requires specialized connectors for each format; by keeping them encapsulated separately as microservices, we can add, remove, and modify each connector without affecting the others. The microservices are loosely coupled via publish/subscribe messaging centered in what I call the “pub/sub hub.”
+Hôm nay tại SAP Sapphire, **Amazon Web Services, Inc. (AWS)** và **SAP** thông báo sự phát hành của chương trình **AI Co-Innovation** nhằm giúp các cộng tác viên xây dựng ứng dụng và trợ lý generative artificial intelligence (AI) hỗ trợ khách hàng xử lý nhanh chóng các thách thức kinh doanh trong thời gian thực.
 
-This solution represents what I would consider another reasonable sprint iteration from my last post. The scope is still limited to the ingestion and basic parsing of **HL7v2 messages** formatted in **Encoding Rules 7 (ER7)** through a REST interface.
+Nhiều tổ chức nhận thấy tiềm năng của generative AI’s potential trong việc chuyển đổi công việc kinh doanh của họ, nhưng không biết nên bắt đầu như thế nào. Với việc kết hợp advanced generative AI với dữ liệu của enterprise resource planning (ERP) từ cách hệ thống quan trọng, các công ty có thể nhận được nhiều giá trị doanh nghiệp đáng kể. Ví dụ:
+* Tối ưu hóa các tuyến đường giao hàng.
+* Dự đoán các tác nhân tiềm ẩn ảnh hưởng đến hoạt động chuỗi cung ứng.
+* Phát triển chính xác các triển vọng tài chính.
 
-**The solution architecture is now as follows:**
+### Tầm nhìn và Mục tiêu
 
-> *Figure 1. Overall architecture; colored boxes represent distinct services.*
+Chương trình AI Co-Innovation thuyết trình về tầm nhìn chung của hai công ty để giúp họ xác định, xây dựng và phát hành ứng dụng generative AI được thiết kế riêng cho khối lượng công việc ERP của họ. Chương trình kết hợp đồng thời công nghệ doanh nghiệp của SAP và dịch vụ generative AI của AWS với chuyên môn từ cả hai bên — bao gồm nhóm chuyên gia AI, nhà tư vấn chuyên nghiệp, và solutions architects — nhằm hỗ trợ khách hàng trong việc triển khai của họ.
 
----
+Chương trình bao gồm các nguồn lực kỹ thuật chuyên dụng, cloud credits, và nhiều dịch vụ khác nhằm hỗ trợ các quy trình development, testing, và deployment cho các ứng dụng cụ thể trong ngành.
 
-While the term *microservices* has some inherent ambiguity, certain traits are common:  
-- Small, autonomous, loosely coupled  
-- Reusable, communicating through well-defined interfaces  
-- Specialized to do one thing well  
-- Often implemented in an **event-driven architecture**
+> "Mối quan hệ đối tác lâu dài giữa AWS và SAP đã góp phần thúc đẩy khách hàng chuyển đổi sang dịch vụ đám mây và khai thác nhiều hơn các giá trị từ dữ liệu kinh doanh của họ. Chương trình AI Co-Innovation là một bước tiến quan trọng, sẽ đem đến cho các tổ chức về sự bảo mật và linh hoạt trong việc xây dựng các ứng dụng generative AI với Amazon Bedrock có khả năng phân tích và hành động dựa trên dữ liệu SAP quan trọng nhất của họ. Điều này sẽ giúp khách hàng chuyển đổi thông tin kinh doanh trong hàng thập kỷ trở nên actionable insights trong quá trình thúc đẩy tổ chức trở nên agile, data-driven."
+>
+> — **Ruba Borno**, Phó chủ tịch phụ trách chuyên gia và đối tác tại AWS.
 
-When determining where to draw boundaries between microservices, consider:  
-- **Intrinsic**: technology used, performance, reliability, scalability  
-- **Extrinsic**: dependent functionality, rate of change, reusability  
-- **Human**: team ownership, managing *cognitive load*
+> "Thông qua chương trình AI Co-Innovation với AWS, chúng tôi đang giúp các doanh nghiệp giải quyết những thách thức vận hành phức tạp nhất của họ một cách chính xác và nhanh chóng. Bằng cách kết hợp sức mạnh của nền tảng tích hợp toàn diện của chúng tôi với SAP BTP và chuyên môn sâu sắc về quy trình kinh doanh của chúng tôi với các khả năng generative AI toàn diện của AWS, các đối tác giờ đây có thể tạo ra các AI agents chuyên biệt để giải quyết những vấn đề cấp bách nhất của họ—từ việc xác định các bất thường tài chính theo thời gian thực cho đến việc tự động tối ưu hóa chuỗi cung ứng trong thời gian gián đoạn."
+>
+> — **Philipp Herzig**, Giám đốc Công nghệ và Giám đốc AI tại SAP.
 
----
+### Công nghệ và Mở rộng
 
-## Technology Choices and Communication Scope
+Chương trình cũng cho phép các đối tác nhanh chóng xây dựng và mở rộng ứng dụng generative AI sử dụng công cụ và dịch vụ generative AI mới nhất của **Amazon Bedrock** bao gồm các mô hình ngôn ngữ lớn như **Amazon Nova** và **Anthropic Claude** trong **SAP AI Foundation** trên **SAP Business Technology Platform**.
 
-| Communication scope                       | Technologies / patterns to consider                                                        |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Within a single microservice              | Amazon Simple Queue Service (Amazon SQS), AWS Step Functions                               |
-| Between microservices in a single service | AWS CloudFormation cross-stack references, Amazon Simple Notification Service (Amazon SNS) |
-| Between services                          | Amazon EventBridge, AWS Cloud Map, Amazon API Gateway                                      |
+Sự công bố này mở rộng hơn nữa công việc mà AWS và SAP đang thực hiện để giúp các khách hàng—như Tập đoàn Hyundai Motor, Moderna, và Tập đoàn Bảo hiểm Zurich—hiện đại hóa và chuyển đổi khối lượng công việc SAP lên AWS, qua đó nhận ra được tính sẵn có, sự linh hoạt và khả năng mở rộng của đám mây. Việc chạy khối lượng công việc SAP trên AWS cho phép khách hàng kết hợp dữ liệu của họ với các giải pháp generative AI.
 
----
+### Đối tác chiến lược
 
-## The Pub/Sub Hub
+Các đối tác bao gồm **Accenture** và **Deloitte** là những đơn vị đầu tiên hợp tác với AWS và SAP thông qua chương trình này, giúp họ đẩy nhanh quá trình phát triển và triển khai các giải pháp generative AI để giải quyết các thách thức phức tạp:
 
-Using a **hub-and-spoke** architecture (or message broker) works well with a small number of tightly related microservices.  
-- Each microservice depends only on the *hub*  
-- Inter-microservice connections are limited to the contents of the published message  
-- Reduces the number of synchronous calls since pub/sub is a one-way asynchronous *push*
+> "Chương trình AI Co-Innovation giữa AWS và SAP đã kết hợp cơ sở hạ tầng đám mây của AWS với kinh nghiệm về phần mềm doanh nghiệp của SAP. Kết hợp với chuyên môn chuyển đổi AI và kiến thức ngành của Accenture, chúng tôi có thể chỉ cho các công ty thấy chính xác cách tích hợp các dịch vụ gen AI với các khối lượng công việc kinh doanh quan trọng nhất của họ. Ví dụ, cùng với AWS và SAP, chúng tôi đang hợp tác với một khách hàng trong lĩnh vực tiện ích để xây dựng khả năng phục hồi tài sản trước thảm họa tự nhiên nhằm dự đoán và ứng phó với các thách thức môi trường, bảo vệ các cảnh quan có nhiều tài sản và duy trì tính liên tục của dịch vụ cho khách hàng của họ."
+>
+> — **Caspar Borggreve**, Giám đốc Điều hành Cấp cao và Giám đốc Nhóm Kinh doanh SAP tại Accenture.
 
-Drawback: **coordination and monitoring** are needed to avoid microservices processing the wrong message.
+> "Chương trình AI Co-Innovation này kết hợp các khả năng generative AI tiên tiến nhất từ AWS và SAP với kinh nghiệm sâu sắc trong ngành cùng khả năng công nghệ của Deloitte để mang lại các giải pháp mang tính chuyển đổi cho khách hàng của chúng tôi. Thông qua chương trình này, chúng tôi đang xây dựng một giải pháp tài chính được hỗ trợ bởi Amazon Bedrock nhằm giúp các công ty chăm sóc sức khỏe và khoa học đời sống tối ưu hóa danh mục sản phẩm, cải thiện độ chính xác của dự báo, và duy trì mức giá cạnh tranh—ngay cả trong điều kiện thị trường không chắc chắn."
+>
+> — **Nishita Henry**, Giám đốc Thương mại Toàn cầu của AWS tại Deloitte Consulting LLP.
 
 ---
-
-## Core Microservice
-
-Provides foundational data and communication layer, including:  
-- **Amazon S3** bucket for data  
-- **Amazon DynamoDB** for data catalog  
-- **AWS Lambda** to write messages into the data lake and catalog  
-- **Amazon SNS** topic as the *hub*  
-- **Amazon S3** bucket for artifacts such as Lambda code
-
-> Only allow indirect write access to the data lake through a Lambda function → ensures consistency.
-
----
-
-## Front Door Microservice
-
-- Provides an API Gateway for external REST interaction  
-- Authentication & authorization based on **OIDC** via **Amazon Cognito**  
-- Self-managed *deduplication* mechanism using DynamoDB instead of SNS FIFO because:  
-  1. SNS deduplication TTL is only 5 minutes  
-  2. SNS FIFO requires SQS FIFO  
-  3. Ability to proactively notify the sender that the message is a duplicate  
-
----
-
-## Staging ER7 Microservice
-
-- Lambda “trigger” subscribed to the pub/sub hub, filtering messages by attribute  
-- Step Functions Express Workflow to convert ER7 → JSON  
-- Two Lambdas:  
-  1. Fix ER7 formatting (newline, carriage return)  
-  2. Parsing logic  
-- Result or error is pushed back into the pub/sub hub  
-
----
-
-## New Features in the Solution
-
-### 1. AWS CloudFormation Cross-Stack References
-Example *outputs* in the core microservice:
-```yaml
-Outputs:
-  Bucket:
-    Value: !Ref Bucket
-    Export:
-      Name: !Sub ${AWS::StackName}-Bucket
-  ArtifactBucket:
-    Value: !Ref ArtifactBucket
-    Export:
-      Name: !Sub ${AWS::StackName}-ArtifactBucket
-  Topic:
-    Value: !Ref Topic
-    Export:
-      Name: !Sub ${AWS::StackName}-Topic
-  Catalog:
-    Value: !Ref Catalog
-    Export:
-      Name: !Sub ${AWS::StackName}-Catalog
-  CatalogArn:
-    Value: !GetAtt Catalog.Arn
-    Export:
-      Name: !Sub ${AWS::StackName}-CatalogArn
+Để biết thêm chi tiết về chương trình AI Co-Innovation của AWS và SAP, vui lòng truy cập [aws.amazon.com/sap/ai](https://aws.amazon.com/sap/ai).

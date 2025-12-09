@@ -6,122 +6,208 @@ chapter: false
 pre: " <b> 3.2. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
-# Bắt đầu với healthcare data lakes: Sử dụng microservices
+# Gìn giữ các tiêu chuẩn đạo đức trong thời trang với multimodal toxicity detection của Amazon Bedrock Guardrails
 
-Các data lake có thể giúp các bệnh viện và cơ sở y tế chuyển dữ liệu thành những thông tin chi tiết về doanh nghiệp và duy trì hoạt động kinh doanh liên tục, đồng thời bảo vệ quyền riêng tư của bệnh nhân. **Data lake** là một kho lưu trữ tập trung, được quản lý và bảo mật để lưu trữ tất cả dữ liệu của bạn, cả ở dạng ban đầu và đã xử lý để phân tích. data lake cho phép bạn chia nhỏ các kho chứa dữ liệu và kết hợp các loại phân tích khác nhau để có được thông tin chi tiết và đưa ra các quyết định kinh doanh tốt hơn.
-
-Bài đăng trên blog này là một phần của loạt bài lớn hơn về việc bắt đầu cài đặt data lake dành cho lĩnh vực y tế. Trong bài đăng blog cuối cùng của tôi trong loạt bài, *“Bắt đầu với data lake dành cho lĩnh vực y tế: Đào sâu vào Amazon Cognito”*, tôi tập trung vào các chi tiết cụ thể của việc sử dụng Amazon Cognito và Attribute Based Access Control (ABAC) để xác thực và ủy quyền người dùng trong giải pháp data lake y tế. Trong blog này, tôi trình bày chi tiết cách giải pháp đã phát triển ở cấp độ cơ bản, bao gồm các quyết định thiết kế mà tôi đã đưa ra và các tính năng bổ sung được sử dụng. Bạn có thể truy cập các code samples cho giải pháp tại Git repo này để tham khảo.
+**Tác giả:** Jean Jacques Mikem và Jordan Jones
+**Ngày đăng:** 11 JUL 2025
+**Chuyên mục:** Amazon Bedrock Guardrails, Amazon Simple Storage Service (S3), AWS Lambda, Intermediate (200), Technical How-to
 
 ---
 
-## Hướng dẫn kiến trúc
+Ngành thời trang toàn cầu được ước tính sẽ đạt **1,84 nghìn tỉ đô la trong năm 2025**, chiếm khoảng **1,63% GDP thế giới** (Statista, 2025). Với lượng lớn vốn được tạo ra, ngành thời trang có nguy cơ trở thành mục tiêu của các nội dung độc hại và sử dụng sai mục đích.
 
-Thay đổi chính kể từ lần trình bày cuối cùng của kiến trúc tổng thể là việc tách dịch vụ đơn lẻ thành một tập hợp các dịch vụ nhỏ để cải thiện khả năng bảo trì và tính linh hoạt. Việc tích hợp một lượng lớn dữ liệu y tế khác nhau thường yêu cầu các trình kết nối chuyên biệt cho từng định dạng; bằng cách giữ chúng được đóng gói riêng biệt với microservices, chúng ta có thể thêm, xóa và sửa đổi từng trình kết nối mà không ảnh hưởng đến những kết nối khác. Các microservices được kết nối rời thông qua tin nhắn publish/subscribe tập trung trong cái mà tôi gọi là “pub/sub hub”.
-
-Giải pháp này đại diện cho những gì tôi sẽ coi là một lần lặp nước rút hợp lý khác từ last post của tôi. Phạm vi vẫn được giới hạn trong việc nhập và phân tích cú pháp đơn giản của các **HL7v2 messages** được định dạng theo **Quy tắc mã hóa 7 (ER7)** thông qua giao diện REST.
-
-**Kiến trúc giải pháp bây giờ như sau:**
-
-> *Hình 1. Kiến trúc tổng thể; những ô màu thể hiện những dịch vụ riêng biệt.*
+Trong ngành thời trang, chúng tôi ủng hộ việc sử dụng **multimodal toxicity detection** của **Amazon Bedrock Guardrails** để ngăn chặn nội dung gây hại. Nếu bạn là doanh nghiệp lớn hoặc nhãn hàng đang phát triển, phương pháp này có thể giúp bạn phát hiện các nội dung có nguy cơ độc hại trước khi chúng gây ảnh hưởng đến danh tiếng và tiêu chuẩn đạo đức của thương hiệu.
 
 ---
 
-Mặc dù thuật ngữ *microservices* có một số sự mơ hồ cố hữu, một số đặc điểm là chung:  
-- Chúng nhỏ, tự chủ, kết hợp rời rạc  
-- Có thể tái sử dụng, giao tiếp thông qua giao diện được xác định rõ  
-- Chuyên biệt để giải quyết một việc  
-- Thường được triển khai trong **event-driven architecture**
+## Tổng quan giải pháp
 
-Khi xác định vị trí tạo ranh giới giữa các microservices, cần cân nhắc:  
-- **Nội tại**: công nghệ được sử dụng, hiệu suất, độ tin cậy, khả năng mở rộng  
-- **Bên ngoài**: chức năng phụ thuộc, tần suất thay đổi, khả năng tái sử dụng  
-- **Con người**: quyền sở hữu nhóm, quản lý *cognitive load*
+Để tích hợp multimodal toxicity detection guardrails vào quy trình **image generating workflow** với Amazon Bedrock, bạn có thể sử dụng các dịch vụ AWS sau:
 
----
+* **Amazon S3** để lưu trữ hình ảnh
+* **Amazon S3 Event Notifications** để kích hoạt xử lý khi có hình ảnh mới
+* **AWS Lambda** để xử lý hình ảnh
+* **Amazon Bedrock Guardrails** để phân tích nội dung
 
-## Lựa chọn công nghệ và phạm vi giao tiếp
-
-| Phạm vi giao tiếp                        | Các công nghệ / mô hình cần xem xét                                                        |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Trong một microservice                   | Amazon Simple Queue Service (Amazon SQS), AWS Step Functions                               |
-| Giữa các microservices trong một dịch vụ | AWS CloudFormation cross-stack references, Amazon Simple Notification Service (Amazon SNS) |
-| Giữa các dịch vụ                         | Amazon EventBridge, AWS Cloud Map, Amazon API Gateway                                      |
+Sơ đồ giải pháp minh họa pipeline từ upload ảnh đến xử lý kiểm duyệt tự động.
 
 ---
 
-## The pub/sub hub
+## Điều kiện tiên quyết
 
-Việc sử dụng kiến trúc **hub-and-spoke** (hay message broker) hoạt động tốt với một số lượng nhỏ các microservices liên quan chặt chẽ.  
-- Mỗi microservice chỉ phụ thuộc vào *hub*  
-- Kết nối giữa các microservice chỉ giới hạn ở nội dung của message được xuất  
-- Giảm số lượng synchronous calls vì pub/sub là *push* không đồng bộ một chiều
+Bạn cần:
 
-Nhược điểm: cần **phối hợp và giám sát** để tránh microservice xử lý nhầm message.
+* Một AWS account
+* IAM execution role
+* IAM policy đầy đủ quyền truy cập CloudWatch Logs, S3, và Bedrock Guardrails
 
----
+**IAM Policy tiêu chuẩn:**
 
-## Core microservice
-
-Cung cấp dữ liệu nền tảng và lớp truyền thông, gồm:  
-- **Amazon S3** bucket cho dữ liệu  
-- **Amazon DynamoDB** cho danh mục dữ liệu  
-- **AWS Lambda** để ghi message vào data lake và danh mục  
-- **Amazon SNS** topic làm *hub*  
-- **Amazon S3** bucket cho artifacts như mã Lambda
-
-> Chỉ cho phép truy cập ghi gián tiếp vào data lake qua hàm Lambda → đảm bảo nhất quán.
-
----
-
-## Front door microservice
-
-- Cung cấp API Gateway để tương tác REST bên ngoài  
-- Xác thực & ủy quyền dựa trên **OIDC** thông qua **Amazon Cognito**  
-- Cơ chế *deduplication* tự quản lý bằng DynamoDB thay vì SNS FIFO vì:
-  1. SNS deduplication TTL chỉ 5 phút
-  2. SNS FIFO yêu cầu SQS FIFO
-  3. Chủ động báo cho sender biết message là bản sao
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {"Sid": "CloudWatchLogsAccess","Effect": "Allow","Action": "logs:CreateLogGroup","Resource": "arn:aws:logs:<REGION>:<ACCOUNT-ID>:*"},
+        {"Sid": "CloudWatchLogsStreamAccess","Effect": "Allow","Action": ["logs:CreateLogStream","logs:PutLogEvents"],"Resource": ["arn:aws:logs:<REGION>:<ACCOUNT-ID>:log-group:/aws/lambda/<FUNCTION-NAME>:*"]},
+        {"Sid": "S3ReadAccess","Effect": "Allow","Action": "s3:GetObject","Resource": "arn:aws:s3:::<BUCKET-NAME>/*"},
+        {"Sid": "BedrockGuardrailsAccess","Effect": "Allow","Action": "bedrock:ApplyGuardrail","Resource": "arn:aws:bedrock:<REGION>:<ACCOUNT-ID>:guardrail/<GUARDRAIL-ID>"}
+    ]
+}
+```
 
 ---
 
-## Staging ER7 microservice
+## Tạo multimodal guardrail trong Amazon Bedrock
 
-- Lambda “trigger” đăng ký với pub/sub hub, lọc message theo attribute  
-- Step Functions Express Workflow để chuyển ER7 → JSON  
-- Hai Lambda:
-  1. Sửa format ER7 (newline, carriage return)
-  2. Parsing logic  
-- Kết quả hoặc lỗi được đẩy lại vào pub/sub hub
+1. Truy cập **Amazon Bedrock Console** → Guardrails
+2. Chọn **Create guardrail**
+3. Nhập tên và mô tả
+
+### Cấu hình content filters
+
+* Chọn **Image** trong *Filter for prompts*
+* Bật các danh mục:
+
+  * Hate
+  * Insults
+  * Sexual
+  * Violence
+
+Misconduct và Prompt threat chỉ áp dụng cho text.
 
 ---
 
-## Tính năng mới trong giải pháp
+## Tạo S3 bucket
 
-### 1. AWS CloudFormation cross-stack references
-Ví dụ *outputs* trong core microservice:
-```yaml
-Outputs:
-  Bucket:
-    Value: !Ref Bucket
-    Export:
-      Name: !Sub ${AWS::StackName}-Bucket
-  ArtifactBucket:
-    Value: !Ref ArtifactBucket
-    Export:
-      Name: !Sub ${AWS::StackName}-ArtifactBucket
-  Topic:
-    Value: !Ref Topic
-    Export:
-      Name: !Sub ${AWS::StackName}-Topic
-  Catalog:
-    Value: !Ref Catalog
-    Export:
-      Name: !Sub ${AWS::StackName}-Catalog
-  CatalogArn:
-    Value: !GetAtt Catalog.Arn
-    Export:
-      Name: !Sub ${AWS::StackName}-CatalogArn
+1. Vào **S3 Console → Create Bucket**
+2. Nhập tên và khu vực
+3. Giữ nguyên thiết lập mặc định
+
+Bucket là nơi tải ảnh để kích hoạt pipeline.
+
+---
+
+## Tạo Lambda function
+
+1. Vào **Lambda Console → Create function**
+2. Chọn runtime Python
+3. Gán IAM role với quyền phù hợp
+
+### Python code mẫu
+
+```python
+import boto3
+import json
+import os
+import traceback
+
+s3_client = boto3.client('s3')
+bedrock_runtime_client = boto3.client('bedrock-runtime')
+
+GUARDRAIL_ID = '<YOUR_GUARDRAIL_ID>'
+GUARDRAIL_VERSION = '<SPECIFIC_VERSION>'
+
+SUPPORTED_FORMATS = {'jpg': 'jpeg', 'jpeg': 'jpeg', 'png': 'png'}
+
+def lambda_handler(event, context):
+    bucket = event['Records'][0]['s3']['bucket']['name']
+    key = event['Records'][0]['s3']['object']['key']
+
+    try:
+        file_ext = os.path.splitext(key)[1].lower().lstrip('.')
+        image_format = SUPPORTED_FORMATS.get(file_ext)
+        if not image_format:
+            return {'statusCode': 400, 'body': 'Unsupported image format'}
+    except Exception:
+        return {'statusCode': 500, 'body': 'Error determining file format'}
+
+    try:
+        response = s3_client.get_object(Bucket=bucket, Key=key)
+        image_bytes = response['Body'].read()
+
+        if len(image_bytes) > 4 * 1024 * 1024:
+            return {'statusCode': 400, 'body': 'Image size exceeds 4MB limit'}
+
+        content_to_assess = [
+            {"image": {"format": image_format, "source": {"bytes": image_bytes}}}
+        ]
+
+        guardrail_response = bedrock_runtime_client.apply_guardrail(
+            guardrailIdentifier=GUARDRAIL_ID,
+            guardrailVersion=GUARDRAIL_VERSION,
+            source='INPUT',
+            content=content_to_assess
+        )
+
+        action = guardrail_response.get('action')
+        return {'statusCode': 200, 'body': f'Processed {key}. Guardrail: {action}'}
+
+    except Exception:
+        traceback.print_exc()
+        return {'statusCode': 500, 'body': 'Internal server error'}
+```
+
+Đặt timeout function khoảng **30 giây**.
+
+---
+
+## Tạo S3 Trigger cho Lambda
+
+* Chọn S3 làm nguồn
+* Trỏ đến bucket đã tạo
+* Bật *Object Created* events
+
+---
+
+## Kiểm tra pipeline
+
+Tải lên ảnh dưới 4 MB vào bucket → Kiểm tra CloudWatch Logs để xem kết quả đánh giá:
+
+* NONE → nội dung an toàn
+* BLOCKED → nội dung vi phạm
+
+Ví dụ response (rút gọn):
+
+```json
+{
+  "action": "GUARDRAIL_INTERVENED",
+  "outputs": [{"text": "Sorry, the model cannot answer this question."}],
+  "assessments": [{"contentPolicy": {"filters": [{"type": "HATE", "action": "BLOCKED"}]}}]
+}
+```
+
+---
+
+## Clean Up
+
+1. Xóa event notification trong S3
+2. Xóa bucket
+3. Xóa Lambda function
+4. Xóa IAM role
+5. Xóa Bedrock guardrail nếu không cần
+
+---
+
+## Kết luận
+
+Việc triển khai **Amazon Bedrock Guardrails multimodal toxicity detection** giúp ngành thời trang:
+
+* Tự động xử lý hình ảnh tải lên
+* Kiểm duyệt nội dung bằng AI tiên tiến
+* Giảm rủi ro và xây dựng niềm tin khách hàng
+* Duy trì tính toàn vẹn thương hiệu
+* Vận hành serverless, dễ mở rộng, ít bảo trì
+
+Tham khảo thêm:
+
+* Video *Amazon Bedrock Guardrails: Make Your AI Safe and Ethical*
+* Bài viết *Amazon Bedrock Guardrails image content filters ...*
+
+---
+
+## Về tác giả
+
+**Jordan Jones** – Solutions Architect tại AWS, chuyên về cloud architecture và cybersecurity. Ngoài công việc, anh thích xem giải NBA, giải Sudoku và du lịch.
+
+**Jean Jacques Mikem** – Solutions Architect tại AWS, chuyên thiết kế các giải pháp có khả năng mở rộng, bảo mật cao và kết nối giữa nhu cầu kinh doanh và kỹ thuật.
