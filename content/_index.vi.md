@@ -25,7 +25,7 @@ chapter: false
 
 &emsp; **Thời gian thực tập:** Từ ngày 09/08/2025 đến ngày 12/11/2025
 
-![ảnh đại diện](./images/avarta.jpg)
+![ảnh đại diện](/images/avarta.jpg)
 
 
 
