@@ -82,5 +82,3 @@ The **“AWS Well-Architected Security Pillar”** session provided a deep dive 
 
 ### Event photo
 ![Photo](/images/aws3.jpg)
-![Photo](/images/aws32.jpg)
-![Photo](/images/aws33.jpg)
