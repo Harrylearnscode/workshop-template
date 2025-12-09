@@ -1,57 +1,52 @@
 ---
 title: "Week 1 Worklog"
-date: "`r Sys.Date()`"
+date: "2025-09-09"
 weight: 1
 chapter: false
 pre: " <b> 1.1. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
 
 
 ### Week 1 Objectives:
 
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Form a group, stabilize organization, and clearly understand internship rules and regulations.
 
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+* Complete AWS account creation and receive credits to support learning.
+
+* Learn about basic AWS services and how to set up budgets (AWS Budgets) to manage costs.
+
+* Master knowledge regarding virtual servers (EC2) and organize a meeting to finalize project ideas.
+
+* Learn and practice access management (IAM) and networking (VPC, Security Group, ACLs).
+
+
+### Tasks to be implemented this week:
+| Day | Task                                                                                                                                                                                   | Start Date | End Date | Resources                            |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
+| Mon | - Form group <br> - Read and note the rules and regulations at the internship unit <br> - Create account and search, note down learning roadmap information | 09/08/2025   | 09/08/2025      |
+| Tue | - Learn about courses <br> - Receive free credits on AWS account| 09/09/2025   | 09/09/2025      | <https://cloudjourney.awsstudygroup.com/><br> <https://www.youtube.com/@solution-archiect> <br> <https://viblo.asia/p/aws-free-tier-2025-nhan-ngay-200-credit-huong-dan-chi-tiet-Nj4vg2a3J6r> |
+| Wed | -  Learn about basic services <br> -  Learn about AWS Budgets | 09/10/2025   | 09/10/2025      | <https://cloudjourney.awsstudygroup.com/><br> <https://aws.amazon.com/vi/>|
+| Thu | - Learn basic EC2<br> - Brainstorm ideas for the project  | 09/11/2025   | 09/11/2025      | <https://cloudjourney.awsstudygroup.com/><br> <https://www.youtube.com/watch?v=6PqZVGoeEEA>|
+| Fri | - Learn IAM <br> - Learn VPC (SG, ACLs, deploy EC2) | 09/12/2025   | 09/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
 
 ### Week 1 Achievements:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* Completed organizational tasks and initial practice environment setup:
+  * Formed the group and assigned tasks.
+  * Understood rules and regulations at the internship unit.
+  * Created AWS Free Tier account and successfully received free credits.
 
-* Successfully created and configured an AWS Free Tier account.
+* Implemented cost management and researched service overview:
+  * Researched basic AWS services.
+  * Set up and configured AWS Budgets to control the budget.
 
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
+* Mastered knowledge and practiced with Compute services:
+  * Understood EC2 basics and initialization process.
+  * Successfully practiced deploying an EC2 instance.
 
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
+* Understood and configured Networking and Security components:
+  * Configured IAM (Identity and Access Management).
+  * Set up VPC, configured Security Group (SG) and Network ACLs.
 
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* Join a group

@@ -1,13 +1,10 @@
 ---
 title: "Bản đề xuất"
-date: "`r Sys.Date()`"
+date: "2025-09-09"
 weight: 2
 chapter: false
 pre: " <b> 2. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
 Tại phần này, bạn cần tóm tắt các nội dung trong workshop mà bạn **dự tính** sẽ làm.
 
@@ -28,28 +25,24 @@ Nền tảng sử dụng AWS IoT Core để tiếp nhận dữ liệu MQTT, AWS 
 Giải pháp tạo nền tảng cơ bản để các thành viên phòng lab phát triển một nền tảng IoT lớn hơn, đồng thời cung cấp nguồn dữ liệu cho những người nghiên cứu AI phục vụ huấn luyện mô hình hoặc phân tích. Nền tảng giảm bớt báo cáo thủ công cho từng trạm thông qua hệ thống tập trung, đơn giản hóa quản lý và bảo trì, đồng thời cải thiện độ tin cậy dữ liệu. Chi phí hàng tháng ước tính 0,66 USD (theo AWS Pricing Calculator), tổng cộng 7,92 USD cho 12 tháng. Tất cả thiết bị IoT đã được trang bị từ hệ thống trạm thời tiết hiện tại, không phát sinh chi phí phát triển thêm. Thời gian hoàn vốn 6–12 tháng nhờ tiết kiệm đáng kể thời gian thao tác thủ công.  
 
 ### 3. Kiến trúc giải pháp  
-Nền tảng áp dụng kiến trúc AWS Serverless để quản lý dữ liệu từ 5 trạm dựa trên Raspberry Pi, có thể mở rộng lên 15 trạm. Dữ liệu được tiếp nhận qua AWS IoT Core, lưu trữ trong S3 data lake và xử lý bởi AWS Glue Crawlers và ETL jobs để chuyển đổi và tải vào một S3 bucket khác cho mục đích phân tích. Lambda và API Gateway xử lý bổ sung, trong khi Amplify với Next.js cung cấp bảng điều khiển được bảo mật bởi Cognito.  
 
-![IoT Weather Station Architecture](/images/2-Proposal/edge_architecture.jpeg)
+Trang web được host trên EC2. Dữ liệu được lưu trữ bằng EC2 instance. Hình ảnh được lưu trên S3. Code sẽ dược đẩy lên github nhằm quản lý và tự động đẩy code lên s3 để CodeDeploy sẽ thực hiện deploy lên server. Cloudfront được sử dụng nhằm cải thiện tốc tải. Cognito dùng để quản lý danh tính người dùng. CloudTrail được dùng để giám sát và lữu trữ lịch sử hoạt động. CloudWatch dùng để giám sát và quản lý hiệu suất, tình trạng hoạt động của các tài nguyên và ứng dụng trên AWS. IAM dùng để cấp quyền cho các service. SecretManager được dùng nhằm quản lý các thông tin nhạy cảm.
 
-![IoT Weather Platform Architecture](/images/2-Proposal/platform_architecture.jpeg)
+![AWS Architecture](../../static/images/2-Proposal/AWS_Architecture.jpeg)
 
 *Dịch vụ AWS sử dụng*  
-- *AWS IoT Core*: Tiếp nhận dữ liệu MQTT từ 5 trạm, mở rộng lên 15.  
-- *AWS Lambda*: Xử lý dữ liệu và kích hoạt Glue jobs (2 hàm).  
-- *Amazon API Gateway*: Giao tiếp với ứng dụng web.  
-- *Amazon S3*: Lưu trữ dữ liệu thô (data lake) và dữ liệu đã xử lý (2 bucket).  
-- *AWS Glue*: Crawlers lập chỉ mục dữ liệu, ETL jobs chuyển đổi và tải dữ liệu.  
-- *AWS Amplify*: Lưu trữ giao diện web Next.js.  
-- *Amazon Cognito*: Quản lý quyền truy cập cho người dùng phòng lab.  
-
-*Thiết kế thành phần*  
-- *Thiết bị biên*: Raspberry Pi thu thập và lọc dữ liệu cảm biến, gửi tới IoT Core.  
-- *Tiếp nhận dữ liệu*: AWS IoT Core nhận tin nhắn MQTT từ thiết bị biên.  
-- *Lưu trữ dữ liệu*: Dữ liệu thô lưu trong S3 data lake; dữ liệu đã xử lý lưu ở một S3 bucket khác.  
-- *Xử lý dữ liệu*: AWS Glue Crawlers lập chỉ mục dữ liệu; ETL jobs chuyển đổi để phân tích.  
-- *Giao diện web*: AWS Amplify lưu trữ ứng dụng Next.js cho bảng điều khiển và phân tích thời gian thực.  
-- *Quản lý người dùng*: Amazon Cognito giới hạn 5 tài khoản hoạt động.  
+- *WAF*: Bảo vệ ứng dụng web khỏi các tấn công mạng
+- *AWS CloudFront*: Xử lý dữ liệu và kích hoạt Glue jobs (2 hàm).  
+- *AWS EC2*: Deploy sản phẩm, NAT instance, Database.
+- *AWS VPC *: Giao tiếp với ứng dụng web.  
+- *AWS S3*: Lưu trữ code, file log, hình ảnh.
+- *CodeDeploy*: Deploy code lên EC2.
+- *GitLab*: chứa source code và push code lên s3.
+- *Amazon Cognito*: Quản lý quyền truy cập cho người dùng trang web.  
+- *IAM*: Tạo user và role.
+- *Secret Manager*: Chứa các thông tin quan trọng.
+- *CloudTrail*: Giám sát và lữu trữ lịch sử hoạt động
+- *CloudWatch*: Giám sát và quản lý hiệu suất, tình trạng hoạt động của các tài nguyên và ứng dụng trên AWS
 
 ### 4. Triển khai kỹ thuật  
 *Các giai đoạn triển khai*  
@@ -61,7 +54,7 @@ Dự án gồm 2 phần — thiết lập trạm thời tiết biên và xây d�
 
 *Yêu cầu kỹ thuật*  
 - *Trạm thời tiết biên*: Cảm biến (nhiệt độ, độ ẩm, lượng mưa, tốc độ gió), vi điều khiển ESP32, Raspberry Pi làm thiết bị biên. Raspberry Pi chạy Raspbian, sử dụng Docker để lọc dữ liệu và gửi 1 MB/ngày/trạm qua MQTT qua Wi-Fi.  
-- *Nền tảng thời tiết*: Kiến thức thực tế về AWS Amplify (lưu trữ Next.js), Lambda (giảm thiểu do Next.js xử lý), AWS Glue (ETL), S3 (2 bucket), IoT Core (gateway và rules), và Cognito (5 người dùng). Sử dụng AWS CDK/SDK để lập trình (ví dụ IoT Core rules tới S3). Next.js giúp giảm tải Lambda cho ứng dụng web fullstack.  
+- *Nền tảng thời tiết*: Kiến thức thực tế về AWS Amplify (lưu trữ Next.js), Lambda (giảm thiểu do Next.js xử lý), AWS Glue (ETL), S3 (2 bucket), IoT Core (gateway và rules), và Cognito (5 người dùng). Sử dụng AWS CDK/SDK để lập trình (ví dụ IoT Core rules tới S3). Next.js giúp giảm tải Lambda cho ứng dụng web fullstack.
 
 ### 5. Lộ trình & Mốc triển khai  
 - *Trước thực tập (Tháng 0)*: 1 tháng lên kế hoạch và đánh giá trạm cũ.  

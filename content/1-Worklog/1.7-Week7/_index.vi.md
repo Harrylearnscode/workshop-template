@@ -1,59 +1,35 @@
 ---
 title: "Worklog Tuần 7"
-date: "`r Sys.Date()`"
+date: "2025-09-09"
 weight: 1
 chapter: false
 pre: " <b> 1.7. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
-
 
 ### Mục tiêu tuần 7:
 
-* Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+* Hoàn thành toàn bộ lộ trình học AWS Cloud Practitioner Essentials (Module 5 & 6).
+* Nắm vững các kiến thức về tính phí, hỗ trợ (Billing & Support) và chiến lược di chuyển lên mây (Migration).
+* Tổng hợp và hệ thống hóa lại toàn bộ kiến thức đã học từ đầu khóa.
+* Tìm kiếm tài liệu, bộ câu hỏi mẫu và thực hiện ôn tập kỹ lưỡng để chuẩn bị cho bài thi đánh giá năng lực.
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
 | --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Học AWS Skill builder Module 5 | 20/10/2025   | 20/10/2025   | <https://skillbuilder.aws/learn/94T2BEN85A/aws-cloud-practitioner-essentials/8D79F3AVR7> |
+| 3   | - Học AWS Skill builder Module 6 | 21/10/2025   | 21/10/2025      | <https://skillbuilder.aws/learn/94T2BEN85A/aws-cloud-practitioner-essentials/8D79F3AVR7> |
+| 4   | - Ôn lại kiến thức cũ, chuẩn bị cho bài thi | 22/10/2025   | 22/10/2025      | <https://skillbuilder.aws/learn/94T2BEN85A/aws-cloud-practitioner-essentials/8D79F3AVR7> <br> <https://www.youtube.com/@AWSStudyGroup> |
+| 5   | - Ôn lại kiến thức cũ, chuẩn bị cho bài thi | 23/10/2025   | 23/10/2025      | <https://skillbuilder.aws/learn/94T2BEN85A/aws-cloud-practitioner-essentials/8D79F3AVR7> <br> <https://www.youtube.com/@AWSStudyGroup> |
+| 6   | - Ôn lại kiến thức cũ, chuẩn bị cho bài thi | 24/10/2025   | 24/10/2025      | <https://skillbuilder.aws/learn/94T2BEN85A/aws-cloud-practitioner-essentials/8D79F3AVR7> <br> <https://www.youtube.com/@AWSStudyGroup> |
 
 
 ### Kết quả đạt được tuần 7:
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* **Về kiến thức AWS Skill Builder:**
+  * **Module 5 (Billing & Pricing):** Hiểu rõ về các mô hình tính phí của AWS, AWS Organizations, AWS Billing Dashboard và các gói hỗ trợ (Support Plans).
+  * **Module 6 (Migration & Innovation):** Nắm được khái niệm AWS Cloud Adoption Framework (AWS CAF) và các chiến lược di chuyển dữ liệu lên đám mây (Migration Strategies).
 
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+* **Về công tác ôn tập và chuẩn bị thi:**
+  * Đã hệ thống hóa lại lý thuyết của tất cả các dịch vụ cơ bản (Compute, Storage, Network, Database, Security).
+  * Tìm kiếm và tiếp cận được nguồn tài liệu câu hỏi ôn tập chất lượng (Exam Dumps/Practice Tests).
+  * Hoàn thành việc rà soát kiến thức thông qua các video hướng dẫn từ AWS Study Group.

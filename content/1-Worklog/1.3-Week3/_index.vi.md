@@ -1,59 +1,42 @@
 ---
 title: "Worklog Tuần 3"
-date: "`r Sys.Date()`"
+date: "2025-09-09"
 weight: 1
 chapter: false
 pre: " <b> 1.3. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
-
 
 ### Mục tiêu tuần 3:
 
-* Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+* Xây dựng và hoàn thiện khung Frontend (Skeleton) cho dự án website.
+* Phát triển các tính năng cốt lõi: Hiển thị thực đơn (Menu), Chi tiết món ăn (Meal Detail) và Giỏ hàng (Shopping Cart).
+* Thực hiện kết nối (Integration) giữa Frontend và Backend.
+* Xây dựng giao diện xác thực người dùng: Đăng nhập (Login) và Đăng ký (Register).
+* Tìm hiểu và thực hành dịch vụ giám sát hệ thống Amazon CloudWatch.
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
 | --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Làm Khung frontend <br> - Code menu và meal detail | 22/09/2025   | 22/09/2025      |
+| 3   | - Code shopping cart| 23/09/2025   | 23/09/2025      |  |
+| 4   | - Hoàn thành shopping cart và chuẩn bị nội dung họp | 24/09/2025   | 24/09/2025   | <https://cloudjourney.awsstudygroup.com/> |
+| 5   | - Họp nhóm về tiến độ <br> Connect to backend | 25/09/2025   | 25/09/2025   | |
+| 6   | - Học CloudWatch <br> Tạo các trang đăng nhập, đăng ký | 26/09/2025   | 26/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
 
 ### Kết quả đạt được tuần 3:
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* **Về phát triển Frontend:**
+  * Đã xây dựng thành công cấu trúc dự án Frontend cơ bản.
+  * Hoàn thiện giao diện và logic hiển thị danh sách món ăn (Menu) và trang chi tiết món ăn (Meal Detail).
+  * Xây dựng hoàn chỉnh tính năng Giỏ hàng (Shopping Cart): Thêm, sửa, xóa sản phẩm.
+  * Hoàn thành giao diện cho các trang xác thực: Đăng nhập và Đăng ký.
 
-* Đã tạo và cấu hình AWS Free Tier account thành công.
+* **Về tích hợp hệ thống:**
+  * Đã thực hiện kết nối thành công giữa Frontend và Backend (API Integration).
 
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
+* **Về kiến thức AWS:**
+  * Nắm được khái niệm và cách sử dụng **Amazon CloudWatch** để theo dõi (monitoring) và ghi log cho hệ thống.
 
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+* **Về làm việc nhóm:**
+  * Đã tổ chức họp nhóm để rà soát tiến độ và thống nhất các bước tiếp theo.

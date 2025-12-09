@@ -1,59 +1,42 @@
 ---
 title: "Worklog Tuần 2"
-date: "`r Sys.Date()`"
+date: "2025-09-09"
 weight: 1
 chapter: false
 pre: " <b> 1.2. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
 
 ### Mục tiêu tuần 2:
 
-* Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+* Nắm vững kiến thức nâng cao về mạng, cụ thể là kết nối VPN Site-to-Site.
+* Tìm hiểu và thực hành dịch vụ lưu trữ đối tượng (Amazon S3).
+* Tìm hiểu và triển khai dịch vụ cơ sở dữ liệu quan hệ (Amazon RDS).
+* Ôn tập tổng hợp các kiến thức đã học (VPC, EC2, S3, RDS, IAM) để nắm chắc nền tảng.
+* Bắt đầu triển khai các bước đầu tiên cho dự án: Lên danh sách chức năng và tạo Git repository.
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
 | --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Học VPC site-to-site VPN | 15/09/2025   | 15/09/2025  |<https://cloudjourney.awsstudygroup.com/> <br> <https://www.youtube.com/watch?v=jGLUTFs7-1c&t=4614s>|
+| 3   | - Học S3 | 16/09/2025   | 16/09/2025      | <https://cloudjourney.awsstudygroup.com/> <br> <https://www.youtube.com/watch?v=p9ddQvOoNQ4&t=4788s>|
+| 4   | - Học RDS <br>| 17/09/2025  | 17/09/2025      | <https://cloudjourney.awsstudygroup.com/> <br> <https://www.youtube.com/watch?v=oKNBD-J4cvE&t=478s> |
+| 5   | - Ôn lại các service đã học(VPC, EC2) <br> - Lên danh sách các chức năng cho web  | 18/09/2025   | 18/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 6   | - Ôn lại các service đã học (S3, RDS, IAM)<br> Tạo git repo | 19/09/2025   | 19/09/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
 
 ### Kết quả đạt được tuần 2:
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* **Về kiến thức Networking nâng cao:**
+  * Hiểu được mô hình và cách thiết lập VPC Site-to-Site VPN để kết nối mạng on-premise với AWS.
 
-* Đã tạo và cấu hình AWS Free Tier account thành công.
+* **Về kiến thức Storage & Database:**
+  * **S3:** Nắm được khái niệm Bucket, Object, Storage Classes. Đã thực hành tạo Bucket và upload/download dữ liệu thành công.
+  * **RDS:** Hiểu về dịch vụ database được quản lý (Managed Service). Đã thực hành khởi tạo một RDS instance và thử kết nối cơ bản.
 
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
+* **Về củng cố kiến thức:**
+  * Đã dành thời gian ôn tập lại toàn bộ các dịch vụ nền tảng: EC2, VPC, S3, RDS và IAM để hiểu rõ sự liên kết giữa chúng.
 
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+* **Về tiến độ dự án:**
+  * Đã hoàn thành việc liệt kê chi tiết các chức năng (Functional Requirements) cần thiết cho website dự kiến.
+  * Đã khởi tạo Git Repository để quản lý mã nguồn dự án.

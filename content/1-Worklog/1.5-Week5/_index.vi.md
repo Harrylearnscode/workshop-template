@@ -1,59 +1,39 @@
 ---
 title: "Worklog Tuần 5"
-date: "`r Sys.Date()`"
+date: "2025-09-09"
 weight: 1
 chapter: false
 pre: " <b> 1.5. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
-
 
 ### Mục tiêu tuần 5:
 
-* Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+* Tìm hiểu về cơ sở dữ liệu NoSQL với Amazon DynamoDB.
+* Nắm bắt giải pháp bộ nhớ đệm (Caching) sử dụng Amazon ElastiCache.
+* Nắm vững kỹ năng giám sát hệ thống (Monitoring) và ghi nhật ký hoạt động (Auditing) với CloudWatch và CloudTrail.
+* Thực hành các bài Lab về CloudWatch để áp dụng kiến thức vào thực tế.
+* Làm quen với công nghệ Containerization thông qua Docker.
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
 | --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | -  Học DynamoDB | 06/10/2025   | 06/10/2025      |
+| 3   | - Học ElastiCache      | 07/10/2025   | 07/10/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - Học CloudWatch <br> - Ôn CloudTrail | 08/10/2025   | 08/10/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 5   | - Thực hành lab CloudWatch | 09/10/2025   | 09/10/2025      | <https://www.youtube.com/watch?v=Z0TpxCXkizQ> <br> <https://www.youtube.com/watch?v=_VvB2Amu7Uk&t=776s> <br> <https://www.youtube.com/watch?v=FMfFZwqFbyw> <br> <https://www.youtube.com/watch?v=t_JNjepul10> |
+| 6   | - Learn Docker | 10/10/2025   | 10/10/2025      | <https://www.youtube.com/watch?v=nTM7qPty-Zg> |
 
 
 ### Kết quả đạt được tuần 5:
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* **Về Cơ sở dữ liệu & Caching:**
+  * **DynamoDB:** Hiểu được kiến trúc NoSQL, khái niệm Tables, Items, Attributes và các mô hình tính phí (Provisioned vs On-demand).
+  * **ElastiCache:** Nắm được vai trò của Caching trong việc tăng tốc độ ứng dụng và các engine phổ biến (Redis/Memcached).
 
-* Đã tạo và cấu hình AWS Free Tier account thành công.
+* **Về Giám sát & Quản trị:**
+  * **CloudWatch:** Biết cách thiết lập Metrics, tạo Dashboards theo dõi và cấu hình Alarms để cảnh báo sự cố.
+  * **CloudTrail:** Hiểu cách dịch vụ này ghi lại lịch sử các lời gọi API để phục vụ mục đích kiểm toán và bảo mật.
+  * Hoàn thành các bài Lab thực hành thiết lập giám sát hệ thống.
 
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+* **Về Công nghệ Container:**
+  * **Docker:** Nắm được các khái niệm cơ bản (Image, Container, Dockerfile) và quy trình đóng gói ứng dụng.
